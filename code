@@ -1,0 +1,17 @@
+```batch
+@echo off
+
+for /f %%i in ('adb shell "service call iphonesubinfo 1 | awk -F "'" "{print $2}""') do set imei=%%i
+for /f %%i in ('adb shell "getprop gsm.version.baseband"') do set baseband=%%i
+for /f %%i in ('adb shell "getprop ro.build.version.release"') do set software=%%i
+for /f %%i in ('adb shell "getprop gsm.operator.alpha"') do set service_provider=%%i
+for /f %%i in ('adb shell "getprop ril.dsds.bands"') do set bands=%%i
+for /f %%i in ('adb shell "getprop ro.product.model"') do set device_name=%%i
+
+echo IMEI: %imei%
+echo Baseband Version: %baseband%
+echo Software Version: %software%
+echo Current Service Provider: %service_provider%
+echo Supported Bands: %bands%
+echo Device Name: %device_name%
+```
